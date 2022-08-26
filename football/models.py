@@ -10,6 +10,14 @@ class Category(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now= True, blank=True, null=True)
 
+    class Meta:
+        # db_table = 'category'
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
+
+    def __str__(self):
+        return f'{self.libelle}'
+
 
 
 class Product(models.Model):
@@ -28,6 +36,14 @@ class Product(models.Model):
     updated_at = models.DateTimeField(auto_now= True, blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
+    class Meta:
+        # db_table = 'category'
+        verbose_name = "Product"
+        verbose_name_plural = "Products"
+
+    def __str__(self):
+        return f'{self.name}'
+
 
 
 class Event(models.Model):
@@ -37,60 +53,68 @@ class Event(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now= True, blank=True, null=True)
 
+    class Meta:
+        # db_table = 'category'
+        verbose_name = "Event"
+        verbose_name_plural = "Events"
 
-
-class Competition(models.Model):
-    TYPE_COMPETITION_CHOICES = (
-        ('elite 1', 'Elite 1'),
-        ('coupe du cameroun', 'Coupe du cameroun'),
-        ('CAN', 'CAN'),
-        ('coupe du monde', 'Coupe du monde'),
-    )
-
-    type_competition = models.CharField(max_length=18, choices = TYPE_COMPETITION_CHOICES, default='elite 1')
+    def __str__(self):
+        return f'{self.title}'
 
 
 
-class Match(models.Model):
-    score1 = models.IntegerField()
-    score2 = models.IntegerField()
-    day = models.DateField(auto_now=False, auto_now_add=False)
-    time = models.TimeField(auto_now=False, auto_now_add=False)
-    competition = models.ForeignKey(Competition, on_delete=models.CASCADE)
+# class Competition(models.Model):
+#     TYPE_COMPETITION_CHOICES = (
+#         ('elite 1', 'Elite 1'),
+#         ('coupe du cameroun', 'Coupe du cameroun'),
+#         ('CAN', 'CAN'),
+#         ('coupe du monde', 'Coupe du monde'),
+#     )
+
+#     type_competition = models.CharField(max_length=18, choices = TYPE_COMPETITION_CHOICES, default='elite 1')
 
 
 
-class Team(models.Model):
-    CATEGORY_CHOICES = (
-        ('junior', 'Junior'),
-        ('senior', 'Senior'),
-        ('professionnel', 'Professionnel'),
-    )
-
-    GENDER_CHOICES = (
-        ('masculin', 'Masculin'),
-        ('feminin', 'Feminin'),
-    )
-
-    SPORT_CHOICES = (
-        ('football', 'Football'),
-        ('basketball', 'Basketball'),
-        ('handball', 'Handball'),
-        ('volleyball', 'Volleyball'),
-        ('tennis', 'Tennis'),
-    )
-
-    name = models.CharField(max_length=255)
-    number_players = models.IntegerField()
-    category = models.CharField(max_length=15, choices = CATEGORY_CHOICES, default='junior')
-    gender = models.CharField(max_length=10, choices = GENDER_CHOICES, default='masculin')
-    sport = models.CharField(max_length=10, choices = SPORT_CHOICES, default='football')
+# class Match(models.Model):
+#     score1 = models.IntegerField()
+#     score2 = models.IntegerField()
+#     day = models.DateField(auto_now=False, auto_now_add=False)
+#     time = models.TimeField(auto_now=False, auto_now_add=False)
+#     competition = models.ForeignKey(Competition, on_delete=models.CASCADE)
 
 
 
-class MatchTeam(models.Model):
-    match = models.ManyToManyField('Match', blank=True)
-    team = models.ManyToManyField('Team', blank=True)
+# class Team(models.Model):
+#     CATEGORY_CHOICES = (
+#         ('junior', 'Junior'),
+#         ('senior', 'Senior'),
+#         ('professionnel', 'Professionnel'),
+#     )
+
+#     GENDER_CHOICES = (
+#         ('masculin', 'Masculin'),
+#         ('feminin', 'Feminin'),
+#     )
+
+#     SPORT_CHOICES = (
+#         ('football', 'Football'),
+#         ('basketball', 'Basketball'),
+#         ('handball', 'Handball'),
+#         ('volleyball', 'Volleyball'),
+#         ('tennis', 'Tennis'),
+#     )
+
+#     name = models.CharField(max_length=255)
+#     number_players = models.IntegerField()
+#     category = models.CharField(max_length=15, choices = CATEGORY_CHOICES, default='junior')
+#     gender = models.CharField(max_length=10, choices = GENDER_CHOICES, default='masculin')
+#     sport = models.CharField(max_length=10, choices = SPORT_CHOICES, default='football')
+
+
+
+# class MatchTeam(models.Model):
+#     match = models.ManyToManyField('Match', blank=True)
+#     team = models.ManyToManyField('Team', blank=True)
 
 
 
@@ -101,6 +125,14 @@ class Article(models.Model):
     link = models.URLField(blank = True)
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now= True, blank=True, null=True)
+
+    class Meta:
+        # db_table = 'category'
+        verbose_name = "Article"
+        verbose_name_plural = "Articles"
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 
@@ -121,6 +153,14 @@ class News(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now= True, blank=True, null=True)
 
+    class Meta:
+        # db_table = 'category'
+        verbose_name = "News"
+        verbose_name_plural = "News"
+
+    def __str__(self):
+        return f'{self.title}'
+
 
 
 class PostTweet(models.Model):
@@ -131,6 +171,14 @@ class PostTweet(models.Model):
     source = models.CharField(max_length = 255)
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now= True, blank=True, null=True)
+
+    class Meta:
+        # db_table = 'category'
+        verbose_name = "Post et Tweet"
+        verbose_name_plural = "Posts et Tweets"
+
+    def __str__(self):
+        return f'{self.title}'
 
 
 
@@ -147,8 +195,24 @@ class Favorite(models.Model):
     type = models.CharField(max_length=15, choices = FAVORITES_CHOICES, default='article')
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
+    class Meta:
+        # db_table = 'category'
+        verbose_name = "Favorite"
+        verbose_name_plural = "Favorites"
+
+    def __str__(self):
+        return f'{self.type}'
+
 
 
 class Like(models.Model):
     user = models.ForeignKey(CustomUser, on_delete = models.CASCADE)
     article = models.ForeignKey(Article, on_delete = models.CASCADE)
+
+    class Meta:
+        # db_table = 'category'
+        verbose_name = "Like"
+        verbose_name_plural = "Likes"
+
+    def __str__(self):
+        return f'{self.user}'

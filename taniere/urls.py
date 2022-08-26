@@ -47,3 +47,7 @@ urlpatterns = [
     path('documentation', schema_view.with_ui('swagger', cache_timeout=0), name = "schema-swagger-ui"),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout = 0), name = "schema-swagger-ui"),
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+
+admin.site.site_header = "LA TANIERE ADMINISTRATION"
+admin.site.site_title = "LA TANIERE ADMINISTRATION"
+admin.site.index_title = "LA TANIERE ADMINISTRATION"

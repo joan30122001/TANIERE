@@ -1,8 +1,10 @@
 import datetime
 from django.shortcuts import render
-from .models import Category, Product, Event, Competition, Match, Team, MatchTeam, Article, News, PostTweet, Favorite, Like
+from .models import Category, Product, Event, Article, News, PostTweet, Favorite, Like
+# from .models import Competition, Match, Team, MatchTeam
 from rest_framework.response import Response
-from .serializers import CategorySerializer, ProductSerializer, EventSerializer, CompetitionSerializer, MatchSerializer, TeamSerializer, MatchTeamSerializer, ArticleSerializer, NewsSerializer, PostTweetSerializer, FavoriteSerializer, LikeSerializer
+from .serializers import CategorySerializer, ProductSerializer, EventSerializer, ArticleSerializer, NewsSerializer, PostTweetSerializer, FavoriteSerializer, LikeSerializer
+# from .serializers import CompetitionSerializer, MatchSerializer, TeamSerializer, MatchTeamSerializer
 from rest_framework.generics import GenericAPIView
 from rest_framework import exceptions, status, generics, mixins, viewsets, permissions, serializers
 from rest_framework.permissions import IsAuthenticated
@@ -131,159 +133,159 @@ class EventViewSet(viewsets.ViewSet):
 
 
 
-class CompetitionViewSet(viewsets.ViewSet):
+# class CompetitionViewSet(viewsets.ViewSet):
     
-    def list(self, request):
-        serializer = CompetitionSerializer(Competition.objects.all(), many=True)
-        return Response({
-            'data': serializer.data
-        })
+#     def list(self, request):
+#         serializer = CompetitionSerializer(Competition.objects.all(), many=True)
+#         return Response({
+#             'data': serializer.data
+#         })
 
-    def retrieve(self, request, pk=None):
-        competition = Competition.objects.get(id=pk)
-        serializer = CompetitionSerializer(competition)
-        return Response({
-            'data': serializer.data
-        })
+#     def retrieve(self, request, pk=None):
+#         competition = Competition.objects.get(id=pk)
+#         serializer = CompetitionSerializer(competition)
+#         return Response({
+#             'data': serializer.data
+#         })
 
-    def create(self, request):
-        serializer = CompetitionSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response({
-            'data': serializer.data
-        }, status=status.HTTP_201_CREATED)
+#     def create(self, request):
+#         serializer = CompetitionSerializer(data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#         return Response({
+#             'data': serializer.data
+#         }, status=status.HTTP_201_CREATED)
 
-    def update(self, request, pk=None):
-        competition = Competition.objects.get(id=pk)
-        serializer = CompetitionSerializer(instance=competition, data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response({
-            'data': serializer.data}, status=status.HTTP_202_ACCEPTED)
+#     def update(self, request, pk=None):
+#         competition = Competition.objects.get(id=pk)
+#         serializer = CompetitionSerializer(instance=competition, data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#         return Response({
+#             'data': serializer.data}, status=status.HTTP_202_ACCEPTED)
 
-    def destroy(self, request, pk=None):
-        competition = Competition.objects.get(id=pk)
-        competition.delete()
+#     def destroy(self, request, pk=None):
+#         competition = Competition.objects.get(id=pk)
+#         competition.delete()
 
-        return Response(status=status.HTTP_204_NO_CONTENT)
+#         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 
-class MatchViewSet(viewsets.ViewSet):
+# class MatchViewSet(viewsets.ViewSet):
     
-    def list(self, request):
-        serializer = MatchSerializer(Match.objects.all(), many=True)
-        return Response({
-            'data': serializer.data
-        })
+#     def list(self, request):
+#         serializer = MatchSerializer(Match.objects.all(), many=True)
+#         return Response({
+#             'data': serializer.data
+#         })
 
-    def retrieve(self, request, pk=None):
-        match = Match.objects.get(id=pk)
-        serializer = MatchSerializer(match)
-        return Response({
-            'data': serializer.data
-        })
+#     def retrieve(self, request, pk=None):
+#         match = Match.objects.get(id=pk)
+#         serializer = MatchSerializer(match)
+#         return Response({
+#             'data': serializer.data
+#         })
 
-    def create(self, request):
-        serializer = MatchSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response({
-            'data': serializer.data
-        }, status=status.HTTP_201_CREATED)
+#     def create(self, request):
+#         serializer = MatchSerializer(data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#         return Response({
+#             'data': serializer.data
+#         }, status=status.HTTP_201_CREATED)
 
-    def update(self, request, pk=None):
-        match = Match.objects.get(id=pk)
-        serializer = MatchSerializer(instance=match, data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response({
-            'data': serializer.data}, status=status.HTTP_202_ACCEPTED)
+#     def update(self, request, pk=None):
+#         match = Match.objects.get(id=pk)
+#         serializer = MatchSerializer(instance=match, data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#         return Response({
+#             'data': serializer.data}, status=status.HTTP_202_ACCEPTED)
 
-    def destroy(self, request, pk=None):
-        match = Match.objects.get(id=pk)
-        match.delete()
+#     def destroy(self, request, pk=None):
+#         match = Match.objects.get(id=pk)
+#         match.delete()
 
-        return Response(status=status.HTTP_204_NO_CONTENT)
+#         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 
-class TeamViewSet(viewsets.ViewSet):
+# class TeamViewSet(viewsets.ViewSet):
     
-    def list(self, request):
-        serializer = TeamSerializer(Team.objects.all(), many=True)
-        return Response({
-            'data': serializer.data
-        })
+#     def list(self, request):
+#         serializer = TeamSerializer(Team.objects.all(), many=True)
+#         return Response({
+#             'data': serializer.data
+#         })
 
-    def retrieve(self, request, pk=None):
-        team = Team.objects.get(id=pk)
-        serializer = TeamSerializer(team)
-        return Response({
-            'data': serializer.data
-        })
+#     def retrieve(self, request, pk=None):
+#         team = Team.objects.get(id=pk)
+#         serializer = TeamSerializer(team)
+#         return Response({
+#             'data': serializer.data
+#         })
 
-    def create(self, request):
-        serializer = TeamSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response({
-            'data': serializer.data
-        }, status=status.HTTP_201_CREATED)
+#     def create(self, request):
+#         serializer = TeamSerializer(data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#         return Response({
+#             'data': serializer.data
+#         }, status=status.HTTP_201_CREATED)
 
-    def update(self, request, pk=None):
-        team = Team.objects.get(id=pk)
-        serializer = TeamSerializer(instance=team, data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response({
-            'data': serializer.data}, status=status.HTTP_202_ACCEPTED)
+#     def update(self, request, pk=None):
+#         team = Team.objects.get(id=pk)
+#         serializer = TeamSerializer(instance=team, data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#         return Response({
+#             'data': serializer.data}, status=status.HTTP_202_ACCEPTED)
 
-    def destroy(self, request, pk=None):
-        team = Team.objects.get(id=pk)
-        team.delete()
+#     def destroy(self, request, pk=None):
+#         team = Team.objects.get(id=pk)
+#         team.delete()
 
-        return Response(status=status.HTTP_204_NO_CONTENT)
+#         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 
-class MatchTeamViewSet(viewsets.ViewSet):
+# class MatchTeamViewSet(viewsets.ViewSet):
     
-    def list(self, request):
-        serializer = MatchTeamSerializer(MatchTeam.objects.all(), many=True)
-        return Response({
-            'data': serializer.data
-        })
+#     def list(self, request):
+#         serializer = MatchTeamSerializer(MatchTeam.objects.all(), many=True)
+#         return Response({
+#             'data': serializer.data
+#         })
 
-    def retrieve(self, request, pk=None):
-        matchteam = MatchTeam.objects.get(id=pk)
-        serializer = MatchTeamSerializer(matchteam)
-        return Response({
-            'data': serializer.data
-        })
+#     def retrieve(self, request, pk=None):
+#         matchteam = MatchTeam.objects.get(id=pk)
+#         serializer = MatchTeamSerializer(matchteam)
+#         return Response({
+#             'data': serializer.data
+#         })
 
-    def create(self, request):
-        serializer = MatchTeamSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response({
-            'data': serializer.data
-        }, status=status.HTTP_201_CREATED)
+#     def create(self, request):
+#         serializer = MatchTeamSerializer(data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#         return Response({
+#             'data': serializer.data
+#         }, status=status.HTTP_201_CREATED)
 
-    def update(self, request, pk=None):
-        matchteam = MatchTeam.objects.get(id=pk)
-        serializer = MatchTeamSerializer(instance=matchteam, data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response({
-            'data': serializer.data}, status=status.HTTP_202_ACCEPTED)
+#     def update(self, request, pk=None):
+#         matchteam = MatchTeam.objects.get(id=pk)
+#         serializer = MatchTeamSerializer(instance=matchteam, data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#         return Response({
+#             'data': serializer.data}, status=status.HTTP_202_ACCEPTED)
 
-    def destroy(self, request, pk=None):
-        matchteam = MatchTeam.objects.get(id=pk)
-        matchteam.delete()
+#     def destroy(self, request, pk=None):
+#         matchteam = MatchTeam.objects.get(id=pk)
+#         matchteam.delete()
 
-        return Response(status=status.HTTP_204_NO_CONTENT)
+#         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 

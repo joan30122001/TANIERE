@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import CategoryViewSet, ProductViewSet, EventViewSet, CompetitionViewSet, MatchViewSet, TeamViewSet, MatchTeamViewSet, ArticleViewSet, NewsViewSet, PostTweetViewSet, LikeCreate, DisLIke
+from .views import CategoryViewSet, ProductViewSet, EventViewSet, ArticleViewSet, NewsViewSet, PostTweetViewSet, LikeCreate, DisLIke
+# from .views import CompetitionViewSet, MatchViewSet, TeamViewSet, MatchTeamViewSet
 from football import views
 
 
@@ -33,42 +34,42 @@ urlpatterns = [
         'put': 'update',
         'delete': 'destroy'
     })),
-    path("competition" , CompetitionViewSet.as_view({
-        "get":"list",
-        "post":"create"
-    })),
-    path('competition/<str:pk>', CompetitionViewSet.as_view({
-        'get': "retrieve",
-        'put': 'update',
-        'delete': 'destroy'
-    })),
-    path("match" , MatchViewSet.as_view({
-        "get":"list",
-        "post":"create"
-    })),
-    path('match/<str:pk>', MatchViewSet.as_view({
-        'get': "retrieve",
-        'put': 'update',
-        'delete': 'destroy'
-    })),
-    path("team" , TeamViewSet.as_view({
-        "get":"list",
-        "post":"create"
-    })),
-    path('team/<str:pk>', TeamViewSet.as_view({
-        'get': "retrieve",
-        'put': 'update',
-        'delete': 'destroy'
-    })),
-    path("matchteam" , MatchTeamViewSet.as_view({
-        "get":"list",
-        "post":"create"
-    })),
-    path('matchteam/<str:pk>', MatchTeamViewSet.as_view({
-        'get': "retrieve",
-        'put': 'update',
-        'delete': 'destroy'
-    })),
+    # path("competition" , CompetitionViewSet.as_view({
+    #     "get":"list",
+    #     "post":"create"
+    # })),
+    # path('competition/<str:pk>', CompetitionViewSet.as_view({
+    #     'get': "retrieve",
+    #     'put': 'update',
+    #     'delete': 'destroy'
+    # })),
+    # path("match" , MatchViewSet.as_view({
+    #     "get":"list",
+    #     "post":"create"
+    # })),
+    # path('match/<str:pk>', MatchViewSet.as_view({
+    #     'get': "retrieve",
+    #     'put': 'update',
+    #     'delete': 'destroy'
+    # })),
+    # path("team" , TeamViewSet.as_view({
+    #     "get":"list",
+    #     "post":"create"
+    # })),
+    # path('team/<str:pk>', TeamViewSet.as_view({
+    #     'get': "retrieve",
+    #     'put': 'update',
+    #     'delete': 'destroy'
+    # })),
+    # path("matchteam" , MatchTeamViewSet.as_view({
+    #     "get":"list",
+    #     "post":"create"
+    # })),
+    # path('matchteam/<str:pk>', MatchTeamViewSet.as_view({
+    #     'get': "retrieve",
+    #     'put': 'update',
+    #     'delete': 'destroy'
+    # })),
     path("article" , ArticleViewSet.as_view({
         "get":"list",
         "post":"create"

@@ -16,7 +16,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class CategoryRelatedField(serializers.RelatedField):
     def to_representation(self, instance):
-        return FiliereSerializer(instance).data
+        return CategorySerializer(instance).data
 
     def to_internal_value(self, data):
         return self.queryset.get(pk=data)

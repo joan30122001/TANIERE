@@ -221,10 +221,10 @@ class Like(models.Model):
 
 
 
-# def user_images(instance, filename):
-#     date_time = datetime.now().strftime("%Y_%m_%d,%H:%M:%S")
-#     saved_file_name = instance.user.username + "-" + date_time + ".jpg"
-#     return 'profile/{0}/{1}'.format(instance.user.username, saved_file_name)
+def user_images(instance, filename):
+    date_time = datetime.now().strftime("%Y_%m_%d,%H:%M:%S")
+    saved_file_name = instance.user.username + "-" + date_time + ".jpg"
+    return 'profile/{0}/{1}'.format(instance.user.username, saved_file_name)
 
 
 
@@ -238,7 +238,7 @@ class Profile(models.Model):
 
 
 
-@receiver(post_delete, sender=Profile)
-def profile_image_delete(sender, instance, **kwargs):
-    if instance.image:
-        instance.image.delete(True)
+# @receiver(post_delete, sender=Profile)
+# def profile_image_delete(sender, instance, **kwargs):
+#     if instance.image:
+#         instance.image.delete(True)

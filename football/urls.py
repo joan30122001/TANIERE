@@ -12,6 +12,7 @@ router.register('user', views.UserView)
 
 urlpatterns = [
     path('', include(router.urls)),
+    # path('user', views.UserView),
     path("category" ,  CategoryViewSet.as_view({
         "get":"list",
         "post":"create"

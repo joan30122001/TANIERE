@@ -1,8 +1,9 @@
 from django.urls import path
 from auth.views import (
-    RegisterView, ChangePasswordView, UpdateProfileView, LogoutView,
-    UpdateUserImageView, DeleteProfileView, ResetPasswordView,
+    RegisterView, ChangePasswordView, LogoutView,
+    DeleteProfileView, ResetPasswordView,
     ValidateConfirmationCodeView, ForgotPasswordView)
+from auth.views import UpdateProfileView, UpdateUserImageView
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView, TokenRefreshView)

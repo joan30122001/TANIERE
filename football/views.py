@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 # from .models import Competition, Match, Team, MatchTeam
 from rest_framework.response import Response
 from .serializers import CategorySerializer, ProductSerializer, EventSerializer, ArticleSerializer, NewsSerializer, PostTweetSerializer, FavoriteSerializer, LikeSerializer, UserSerializer
-# from .serializers import CompetitionSerializer, MatchSerializer, TeamSerializer, MatchTeamSerializer
+# from .serializers import CompetitionSerializer, MatchSerializer, TeamSerializer, MatchTeamSerializer, 
 from rest_framework.generics import GenericAPIView
 from rest_framework import exceptions, status, generics, mixins, viewsets, permissions, serializers
 from rest_framework.permissions import IsAuthenticated

@@ -12,7 +12,8 @@ from django.core.mail import EmailMessage
 
 from football.models import Profile
 from .serializers import (
-    RegisterSerializer, ChangePasswordSerializer, UpdateProfileSerializer)
+    RegisterSerializer, ChangePasswordSerializer)
+from .serializers import UpdateProfileSerializer
 
 import random
 

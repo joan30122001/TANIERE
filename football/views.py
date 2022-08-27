@@ -1,9 +1,10 @@
 import datetime
 from django.shortcuts import render
 from .models import Category, Product, Event, Article, News, PostTweet, Favorite, Like
+from django.contrib.auth.models import User
 # from .models import Competition, Match, Team, MatchTeam
 from rest_framework.response import Response
-from .serializers import CategorySerializer, ProductSerializer, EventSerializer, ArticleSerializer, NewsSerializer, PostTweetSerializer, FavoriteSerializer, LikeSerializer
+from .serializers import CategorySerializer, ProductSerializer, EventSerializer, ArticleSerializer, NewsSerializer, PostTweetSerializer, FavoriteSerializer, LikeSerializer, UserSerializer
 # from .serializers import CompetitionSerializer, MatchSerializer, TeamSerializer, MatchTeamSerializer
 from rest_framework.generics import GenericAPIView
 from rest_framework import exceptions, status, generics, mixins, viewsets, permissions, serializers
@@ -440,3 +441,10 @@ class DisLIke(generics.DestroyAPIView):
     allowed_role='user'
     queryset=Like.objects.all()
     serializer_class=LikeSerializer
+
+
+
+class UserView(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAdminUser]

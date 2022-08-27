@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
-from users.models import CustomUser
+from django.db.models.signals import post_delete
+from django.dispatch.dispatcher import receiver
+from django.contrib.auth.models import User
 
 
 
@@ -193,7 +195,7 @@ class Favorite(models.Model):
     )
 
     type = models.CharField(max_length=15, choices = FAVORITES_CHOICES, default='article')
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         # db_table = 'category'
@@ -206,7 +208,7 @@ class Favorite(models.Model):
 
 
 class Like(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete = models.CASCADE)
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
     article = models.ForeignKey(Article, on_delete = models.CASCADE)
 
     class Meta:
@@ -216,3 +218,27 @@ class Like(models.Model):
 
     def __str__(self):
         return f'{self.user}'
+
+
+
+# def user_images(instance, filename):
+#     date_time = datetime.now().strftime("%Y_%m_%d,%H:%M:%S")
+#     saved_file_name = instance.user.username + "-" + date_time + ".jpg"
+#     return 'profile/{0}/{1}'.format(instance.user.username, saved_file_name)
+
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    # image = models.ImageField(upload_to=user_images, default='profile/default/default.png')
+    image = models.ImageField()
+
+    def __str__(self):
+        return self.user.username
+
+
+
+@receiver(post_delete, sender=Profile)
+def profile_image_delete(sender, instance, **kwargs):
+    if instance.image:
+        instance.image.delete(True)

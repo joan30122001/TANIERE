@@ -40,10 +40,11 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/football/', include('football.urls')),
-    path('rest-auth/', include('rest_auth.urls')),
-    path('rest-auth/registration/', include('rest_auth.registration.urls')),
-    path('account/', include('allauth.urls')),
-    path('accounts-rest/registration/account-confirm-email/(?P<key>.+)/', confirm_email, name='account_confirm_email'),
+    path('api/auth/', include('auth.urls')),
+    # path('rest-auth/', include('rest_auth.urls')),
+    # path('rest-auth/registration/', include('rest_auth.registration.urls')),
+    # path('account/', include('allauth.urls')),
+    # path('accounts-rest/registration/account-confirm-email/(?P<key>.+)/', confirm_email, name='account_confirm_email'),
     path('documentation', schema_view.with_ui('swagger', cache_timeout=0), name = "schema-swagger-ui"),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout = 0), name = "schema-swagger-ui"),
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

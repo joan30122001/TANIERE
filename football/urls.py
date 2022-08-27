@@ -1,12 +1,17 @@
-from django.urls import path
+from django.urls import path, include
 from .views import CategoryViewSet, ProductViewSet, EventViewSet, ArticleViewSet, NewsViewSet, PostTweetViewSet, LikeCreate, DisLIke
 # from .views import CompetitionViewSet, MatchViewSet, TeamViewSet, MatchTeamViewSet
 from football import views
+from rest_framework import routers
 
 
 
+
+router = routers.DefaultRouter()
+router.register('user', views.UserView)
 
 urlpatterns = [
+    path('', include(router.urls)),
     path("category" ,  CategoryViewSet.as_view({
         "get":"list",
         "post":"create"

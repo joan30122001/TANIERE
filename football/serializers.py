@@ -3,8 +3,7 @@ from .models import Category, Product, Event, Article, News, PostTweet, Favorite
 # from .models import Competition, Match, Team, MatchTeam
 from rest_framework.serializers import SerializerMethodField
 import datetime
-from users.models import CustomUser
-from users.serializers import UserSerializer
+from django.contrib.auth.models import User
 
 
 
@@ -29,6 +28,7 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = [
+                    'id',
                     'name',
                     'description',
                     'price',
@@ -141,6 +141,7 @@ class FavoriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Favorite
         fields = [
+                    'id',
                     'type',
                     'user',
                 ]
@@ -152,3 +153,21 @@ class LikeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Like
         fields = ('id', 'user', 'article')
+
+
+
+class UserSerializer(serializers.ModelSerializer):
+    """
+    serializer for user that serialize :
+    ('id', 'username', 'first_name', 'last_name', 'email', 'image',
+    'is_staff', 'is_active', 'is_superuser')\nbased on default 'User' model
+
+    """
+
+    class Meta:
+        model = User
+        fields = (
+            'id', 'username', 'first_name', 'last_name', 'email', 'image',
+            'is_staff', 'is_active', 'is_superuser')
+
+    image = serializers.ImageField(source='profile.image', required=False)

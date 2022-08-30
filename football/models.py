@@ -52,6 +52,7 @@ class Event(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     image = models.ImageField()
+    link = models.URLField(blank = True)
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now= True, blank=True, null=True)
 
@@ -125,6 +126,8 @@ class Article(models.Model):
     description = models.TextField()
     image = models.ImageField()
     link = models.URLField(blank = True)
+    key_words = models.CharField(max_length = 255)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now= True, blank=True, null=True)
 
@@ -166,11 +169,17 @@ class News(models.Model):
 
 
 class PostTweet(models.Model):
+    SOURCE_CHOICES = (
+        ('facebook', 'Facebook'),
+        ('youtube', 'YouTube'),
+        ('twitter', 'Twitter'),
+    )
+
     title = models.CharField(max_length = 255)
     description = models.TextField()
     image = models.ImageField()
     link = models.URLField(blank = True)
-    source = models.CharField(max_length = 255)
+    source = models.CharField(max_length=10, choices = SOURCE_CHOICES, default='facebook')
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now= True, blank=True, null=True)
 

@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.db.models.signals import post_delete
 from django.dispatch.dispatcher import receiver
 from django.contrib.auth.models import User
+from multiselectfield import MultiSelectField
 
 
 
@@ -31,7 +32,7 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
     price = models.IntegerField()
-    image = models.ImageField()
+    image = models.ImageField(upload_to='media/')
     status = models.CharField(max_length=15, choices = STATUS_CHOICES, default='nouveau')
     reduction = models.IntegerField(null = True)
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
@@ -51,7 +52,7 @@ class Product(models.Model):
 class Event(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    image = models.ImageField()
+    image = models.ImageField(upload_to='media/')
     link = models.URLField(blank = True)
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now= True, blank=True, null=True)
@@ -122,11 +123,31 @@ class Event(models.Model):
 
 
 class Article(models.Model):
+    KEYS_CHOICES = (
+        ('fecafoot', 'FECAFOOT'),
+        ('fifa', 'FIFA'),
+        ("samuel eto'o", "Samuel Eto'o"),
+        ('lions idomptables', 'Lions Idomptables'),
+        ('afrique', 'Afrique'),
+        ('cameroun', 'Cameroun'),
+        ('monde', 'Monde'),
+        ('elite one', 'Elite One'),
+        ('stades', 'Stades'),
+        ('tournois', 'Tournois'),
+        ('crise', 'Crise'),
+        ('jeune', 'Jeune'),
+        ('transferts', 'Transferts'),
+        ('évènements', 'Evènements'),
+        ('CAN', 'CAN'),
+        ('coupe du monde', 'Coupe du Monde'),
+        ('matchs', 'Matchs'),
+    )
+
     name = models.CharField(max_length = 255)
     description = models.TextField()
-    image = models.ImageField()
+    image = models.ImageField(upload_to='media/')
     link = models.URLField(blank = True)
-    key_words = models.CharField(max_length = 255)
+    key_words = MultiSelectField(choices = KEYS_CHOICES, default='fecafoot')
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now= True, blank=True, null=True)
@@ -152,7 +173,7 @@ class News(models.Model):
 
     title = models.CharField(max_length = 255)
     description = models.TextField()
-    image = models.ImageField()
+    image = models.ImageField(upload_to='media/')
     sport = models.CharField(max_length=10, choices = SPORT_CHOICES, default='football')
     link = models.URLField(blank = True)
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
@@ -177,7 +198,7 @@ class PostTweet(models.Model):
 
     title = models.CharField(max_length = 255)
     description = models.TextField()
-    image = models.ImageField()
+    image = models.ImageField(upload_to='media/')
     link = models.URLField(blank = True)
     source = models.CharField(max_length=10, choices = SOURCE_CHOICES, default='facebook')
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
@@ -240,7 +261,7 @@ def user_images(instance, filename):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     # image = models.ImageField(upload_to=user_images, default='profile/default/default.png')
-    image = models.ImageField()
+    image = models.ImageField(upload_to='media/')
 
     def __str__(self):
         return self.user.username

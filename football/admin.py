@@ -5,6 +5,7 @@ from .models import Category, Product, Event, Article, News, PostTweet, Favorite
 
 
 
+
 admin.site.register(Category)
 admin.site.register(Product)
 admin.site.register(Event)

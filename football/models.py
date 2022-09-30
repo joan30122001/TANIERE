@@ -122,32 +122,46 @@ class Event(models.Model):
 
 
 
+class KeyWord(models.Model):
+    name = models.CharField(max_length = 255)
+
+    class Meta:
+        # db_table = 'category'
+        verbose_name = "KeyWord"
+        verbose_name_plural = "KeyWords"
+
+    def __str__(self):
+        return f'{self.name}'
+
+
+
 class Article(models.Model):
-    KEYS_CHOICES = (
-        ('fecafoot', 'FECAFOOT'),
-        ('fifa', 'FIFA'),
-        ("samuel eto'o", "Samuel Eto'o"),
-        ('lions idomptables', 'Lions Idomptables'),
-        ('afrique', 'Afrique'),
-        ('cameroun', 'Cameroun'),
-        ('monde', 'Monde'),
-        ('elite one', 'Elite One'),
-        ('stades', 'Stades'),
-        ('tournois', 'Tournois'),
-        ('crise', 'Crise'),
-        ('jeune', 'Jeune'),
-        ('transferts', 'Transferts'),
-        ('évènements', 'Evènements'),
-        ('CAN', 'CAN'),
-        ('coupe du monde', 'Coupe du Monde'),
-        ('matchs', 'Matchs'),
-    )
+    # KEYS_CHOICES = (
+    #     ('fecafoot', 'FECAFOOT'),
+    #     ('fifa', 'FIFA'),
+    #     ("samuel eto'o", "Samuel Eto'o"),
+    #     ('lions idomptables', 'Lions Idomptables'),
+    #     ('afrique', 'Afrique'),
+    #     ('cameroun', 'Cameroun'),
+    #     ('monde', 'Monde'),
+    #     ('elite one', 'Elite One'),
+    #     ('stades', 'Stades'),
+    #     ('tournois', 'Tournois'),
+    #     ('crise', 'Crise'),
+    #     ('jeune', 'Jeune'),
+    #     ('transferts', 'Transferts'),
+    #     ('évènements', 'Evènements'),
+    #     ('CAN', 'CAN'),
+    #     ('coupe du monde', 'Coupe du Monde'),
+    #     ('matchs', 'Matchs'),
+    # )
 
     name = models.CharField(max_length = 255, verbose_name = "Mame of the article")
     description = models.TextField()
     image = models.ImageField(upload_to='media/')
     link = models.URLField(blank = True)
-    key_words = MultiSelectField(choices = KEYS_CHOICES, default='fecafoot')
+    # key_words = MultiSelectField(choices = KEYS_CHOICES, default='fecafoot')
+    key_words = models.ManyToManyField(KeyWord)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now= True, blank=True, null=True)

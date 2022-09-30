@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product, Event, Article, News, PostTweet, Favorite, Like
+from .models import Category, Product, Event, Article, News, PostTweet, Favorite, Like, KeyWord
 # from .models import Competition, Match, Team, MatchTeam
 
 
@@ -13,6 +13,7 @@ admin.site.register(Event)
 # admin.site.register(Match)
 # admin.site.register(Team)
 # admin.site.register(MatchTeam)
+admin.site.register(KeyWord)
 admin.site.register(Article)
 admin.site.register(News)
 admin.site.register(PostTweet)

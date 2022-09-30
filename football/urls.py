@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import CategoryViewSet, ProductViewSet, EventViewSet, ArticleViewSet, NewsViewSet, PostTweetViewSet, LikeCreate, DisLIke
+from .views import CategoryViewSet, ProductViewSet, EventViewSet, ArticleViewSet, NewsViewSet, PostTweetViewSet, LikeCreate, DisLIke, KeyWordViewSet
 # from .views import CompetitionViewSet, MatchViewSet, TeamViewSet, MatchTeamViewSet
 from football import views
 from rest_framework import routers
@@ -76,6 +76,15 @@ urlpatterns = [
     #     'put': 'update',
     #     'delete': 'destroy'
     # })),
+    path("keyword" , KeyWordViewSet.as_view({
+        "get":"list",
+        "post":"create"
+    })),
+    path('keyword/<str:pk>', KeyWordViewSet.as_view({
+        'get': "retrieve",
+        'put': 'update',
+        'delete': 'destroy'
+    })),
     path("article" , ArticleViewSet.as_view({
         "get":"list",
         "post":"create"

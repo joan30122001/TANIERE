@@ -1,5 +1,5 @@
 from rest_framework import serializers 
-from .models import Category, Product, Event, Article, News, PostTweet, Favorite, Like
+from .models import Category, Product, Event, Article, News, PostTweet, Favorite, Like, KeyWord
 # from .models import Competition, Match, Team, MatchTeam
 from rest_framework.serializers import SerializerMethodField
 import datetime
@@ -116,7 +116,24 @@ class EventSerializer(serializers.ModelSerializer):
 
 
 
+class KeyWordSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = KeyWord
+        fields = "__all__"
+
+
+
+class KeyWordRelatedField(serializers.RelatedField):
+    def to_representation(self, instance):
+        return KeyWordSerializer(instance).data
+
+    def to_internal_value(self, data):
+        return self.queryset.get(pk=data)
+
+
+
 class ArticleSerializer(serializers.ModelSerializer):
+    key_words = KeyWordRelatedField(queryset=KeyWord.objects.all(), many=True)
     class Meta:
         model = Article
         fields = "__all__"

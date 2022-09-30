@@ -1,10 +1,10 @@
 import datetime
 from django.shortcuts import render
-from .models import Category, Product, Event, Article, News, PostTweet, Favorite, Like
+from .models import Category, Product, Event, Article, News, PostTweet, Favorite, Like, KeyWord
 from django.contrib.auth.models import User
 # from .models import Competition, Match, Team, MatchTeam
 from rest_framework.response import Response
-from .serializers import CategorySerializer, ProductSerializer, EventSerializer, ArticleSerializer, NewsSerializer, PostTweetSerializer, FavoriteSerializer, LikeSerializer, UserSerializer
+from .serializers import CategorySerializer, ProductSerializer, EventSerializer, ArticleSerializer, NewsSerializer, PostTweetSerializer, FavoriteSerializer, LikeSerializer, UserSerializer, KeyWordSerializer
 # from .serializers import CompetitionSerializer, MatchSerializer, TeamSerializer, MatchTeamSerializer, 
 from rest_framework.generics import GenericAPIView
 from rest_framework import exceptions, status, generics, mixins, viewsets, permissions, serializers
@@ -287,6 +287,45 @@ class EventViewSet(viewsets.ViewSet):
 #         matchteam.delete()
 
 #         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+
+class KeyWordViewSet(viewsets.ViewSet):
+    
+    def list(self, request):
+        serializer = KeyWordSerializer(KeyWord.objects.all(), many=True)
+        return Response({
+            'data': serializer.data
+        })
+
+    def retrieve(self, request, pk=None):
+        keyword = KeyWord.objects.get(id=pk)
+        serializer = KeyWordSerializer(keyword)
+        return Response({
+            'data': serializer.data
+        })
+
+    def create(self, request):
+        serializer = KeyWordSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({
+            'data': serializer.data
+        }, status=status.HTTP_201_CREATED)
+
+    def update(self, request, pk=None):
+        keyword = KeyWord.objects.get(id=pk)
+        serializer = KeyWordSerializer(instance=keyword, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({
+            'data': serializer.data}, status=status.HTTP_202_ACCEPTED)
+
+    def destroy(self, request, pk=None):
+        keyword = KeyWord.objects.get(id=pk)
+        keyword.delete()
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 

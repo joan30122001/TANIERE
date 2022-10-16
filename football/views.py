@@ -8,11 +8,16 @@ from .serializers import CategorySerializer, ProductSerializer, EventSerializer,
 # from .serializers import CompetitionSerializer, MatchSerializer, TeamSerializer, MatchTeamSerializer, 
 from rest_framework.generics import GenericAPIView
 from rest_framework import exceptions, status, generics, mixins, viewsets, permissions, serializers
+from rest_framework import filters
 from rest_framework.permissions import IsAuthenticated
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.views import APIView
 from django.http import HttpResponse
 from rolepermissions.mixins import HasRoleMixin
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter, OrderingFilter
+# from django_filters.rest_framework import DjangoFilterBackend
+# from django_filters import rest_framework as filters
 
 
 
@@ -332,6 +337,8 @@ class KeyWordViewSet(viewsets.ViewSet):
 class ArticleViewSet(viewsets.ViewSet):
     
     def list(self, request):
+        search_fields = ['name' ,'key_words', 'author']
+        filter_backends = (filters.SearchFilter,)
         serializer = ArticleSerializer(Article.objects.all(), many=True)
         return Response({
             'data': serializer.data
@@ -365,6 +372,12 @@ class ArticleViewSet(viewsets.ViewSet):
         article.delete()
 
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filterset_fields = ['id', 'name']
+    search_fields = ['=name', '=key_words__name', 'author__username']
+    # filter_backends = (filters.DjangoFilterBackend,)
+    # filter_fields = ('id', 'name', 'key_words__name', 'author__username')
 
 
 

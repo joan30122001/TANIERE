@@ -85,7 +85,7 @@ urlpatterns = [
         'put': 'update',
         'delete': 'destroy'
     })),
-    path("article" , ArticleViewSet.as_view({
+    path("article/" , ArticleViewSet.as_view({
         "get":"list",
         "post":"create"
     })),

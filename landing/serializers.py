@@ -1,11 +1,11 @@
 from rest_framework import serializers
-from football.models import Landing
+from landing.models import Landing
 
 
 
 
-class UpdateProfileSerializer(serializers.ModelSerializer):
+class LandingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Landing
-        fields = '__all__'
+        fields = "__all__"

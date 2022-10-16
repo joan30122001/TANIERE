@@ -5,9 +5,6 @@ from landing import views
 
 
 
-router = routers.DefaultRouter()
-router.register('user', views.UserView)
-
 urlpatterns = [
     path("landing" , LandingViewSet.as_view({
         "get":"list",

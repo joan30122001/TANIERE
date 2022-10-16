@@ -337,7 +337,7 @@ class KeyWordViewSet(viewsets.ViewSet):
 class ArticleViewSet(viewsets.ViewSet):
     
     def list(self, request):
-        search_fields = ['name' ,'key_words', 'author']
+        search_fields = ['name' ,'key_words', 'author', 'created_at']
         filter_backends = (filters.SearchFilter,)
         serializer = ArticleSerializer(Article.objects.all(), many=True)
         return Response({

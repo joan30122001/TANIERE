@@ -381,6 +381,38 @@ class ArticleViewSet(viewsets.ViewSet):
 
 
 
+# class ArticleDetail(generics.RetrieveAPIView):
+#     serializer_class = ArticleSerializer
+
+#     def get_queryset(self):
+#         # name = self.kwargs['name']
+#         name = self.request.query_params.get('name', None)
+#         # print(name)
+#         return Article.objects.filter(key_words__name=name)
+
+
+
+class ArticleListDetailfilter(generics.ListAPIView):
+    
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['^name', '^key_words__name']
+
+    # '^' Starts-with search.
+    # '=' Exact matches.
+    # '@' Full-text search. (Currently only supported Django's PostgreSQL backend.)
+    # '$' Regex search.
+
+
+class ArticleSearch(generics.ListAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['^name', '^key_words__name']
+
+
+
 class NewsViewSet(viewsets.ViewSet):
     
     def list(self, request):

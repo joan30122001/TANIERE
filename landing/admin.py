@@ -3,4 +3,9 @@ from .models import Landing
 
 
 
-admin.site.register(Landing)
+class LandingAdmin(admin.ModelAdmin):
+    list_display = ('first_name', 'last_name', 'phone', 'email')
+
+
+
+admin.site.register(Landing, LandingAdmin)

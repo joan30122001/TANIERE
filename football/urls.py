@@ -1,6 +1,6 @@
 from django.urls import path, include
 from .views import CategoryViewSet, ProductViewSet, EventViewSet, ArticleViewSet, NewsViewSet, PostTweetViewSet, LikeCreate, DisLIke, KeyWordViewSet, ArticleSearch, ArticleListDetailfilter
-# from .views import CompetitionViewSet, MatchViewSet, TeamViewSet, MatchTeamViewSet
+# from .views import CompetitionViewSet, MatchViewSet, TeamViewSet, MatchTeamViewSet, ArticleListDetailfilterViewSet
 from football import views
 from rest_framework import routers
 
@@ -118,4 +118,11 @@ urlpatterns = [
     path('userDislike/<int:pk>',DisLIke.as_view()),
     # path('filter-article/', ArticleDetail.as_view(), name='detailcreate'),
     path('search/', ArticleListDetailfilter.as_view(), name='postsearch'),
+    # path('search/', ArticleListDetailfilter.as_view(), name='postsearch'),
+    # path("search/" , ArticleListDetailfilterViewSet.as_view({
+    #     "get":"search",
+    # })),
+    # path('search/', ArticleListDetailfilterViewSet.as_view({
+    #     "get":"list",
+    # })),
 ]

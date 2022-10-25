@@ -399,6 +399,25 @@ class ArticleListDetailfilter(generics.ListAPIView):
     filter_backends = [filters.SearchFilter]
     search_fields = ['^name', '^key_words__name']
 
+# class ArticleListDetailfilterViewSet(viewsets.ModelViewSet):
+    
+#     # def search(self, request):
+#         # name = Article.objects.all()
+#         # serializer = ArticleSerializer(Article.objects.filter(name=name), many=True)
+#         # filter_backends = [filters.SearchFilter]
+#         # search_fields = ['^name', '^key_words__name']
+#         # return Response({
+#         #     'data': serializer.data
+#         # })
+#         queryset = Article.objects.all()
+#         serializer_class = ArticleSerializer
+#         filter_backends = (filters.SearchFilter,)
+#         search_fields = ['name']
+#         # return Response({
+#         #     'data': serializer_class.data
+#         # })
+    
+
     # '^' Starts-with search.
     # '=' Exact matches.
     # '@' Full-text search. (Currently only supported Django's PostgreSQL backend.)
@@ -406,10 +425,12 @@ class ArticleListDetailfilter(generics.ListAPIView):
 
 
 class ArticleSearch(generics.ListAPIView):
+
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['^name', '^key_words__name']
+    
 
 
 

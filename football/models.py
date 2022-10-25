@@ -157,7 +157,7 @@ class Article(models.Model):
     #     ('matchs', 'Matchs'),
     # )
 
-    name = models.CharField(max_length = 255, verbose_name = "Mame of the article")
+    name = models.CharField(max_length = 255, verbose_name = "Name of the article")
     description = models.TextField()
     image = models.ImageField(upload_to='media/')
     link = models.URLField(blank = True)

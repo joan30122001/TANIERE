@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import CategoryViewSet, ProductViewSet, EventViewSet, ArticleViewSet, NewsViewSet, PostTweetViewSet, LikeCreate, DisLIke, KeyWordViewSet, ArticleSearch, ArticleListDetailfilter
+from .views import CategoryViewSet, ProductViewSet, EventViewSet, ArticleViewSet, NewsViewSet, PostTweetViewSet, LikeCreate, DisLIke, KeyWordViewSet, ArticleSearch, ArticleListDetailfilter, ArticleFilterViewSet
 # from .views import CompetitionViewSet, MatchViewSet, TeamViewSet, MatchTeamViewSet, ArticleListDetailfilterViewSet
 from football import views
 from rest_framework import routers
@@ -111,6 +111,9 @@ urlpatterns = [
         'get': "retrieve",
         'put': 'update',
         'delete': 'destroy'
+    })),
+    path('articlefilter/', ArticleFilterViewSet.as_view({
+        'get': "retrieve",
     })),
     path('favorites/', views.FavoriteList.as_view(), name='favorite-list'),
     path('favorites/(?P<pk>[0-9]+)/', views.FavoriteDetail.as_view(), name='favorite-detail'),

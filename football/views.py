@@ -333,12 +333,27 @@ class KeyWordViewSet(viewsets.ViewSet):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+class ArticleFilterViewSet(viewsets.ViewSet):
+
+    def retrieve(self, request):
+        # article = Article.objects.filter(**request.query_params.dict())
+        # serializer = ArticleSerializer(article)
+        key_words = request.query_params.get("key_words", None)
+        # if key_words:
+        article = Article.objects.filter(key_words__name=key_words)
+        serializer = ArticleSerializer(article, many=True)
+        return Response({
+            'data': serializer.data
+        })
+
+
+        
 
 class ArticleViewSet(viewsets.ViewSet):
     
     def list(self, request):
-        search_fields = ['name' ,'key_words', 'author', 'created_at']
-        filter_backends = (filters.SearchFilter,)
+        # search_fields = ['name' ,'key_words', 'author', 'created_at']
+        # filter_backends = (filters.SearchFilter,)
         serializer = ArticleSerializer(Article.objects.all(), many=True)
         return Response({
             'data': serializer.data
